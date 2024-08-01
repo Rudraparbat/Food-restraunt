@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.summary-section {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.billing-details p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 5px 0;
+}
+
+.billing-details p strong {
+    color: #333;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Order Summary</h1>
+        <div class="summary-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                {% for i in p %}
+                <tbody>
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td>1</td>
+                        <td>{{i.price}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            <div class="billing-details">
+                <p><strong>Subtotal:</strong> {{a}}</p>
+                <p><strong>offer:</strong> -{{of}}</p>
+                <p><strong>GST (18%):</strong> {{gs}}</p>
+                <p><strong>Platform Fee:</strong> {{pc}}</p>
+                <p><strong>delivery Fee:</strong> {{dc}}</p>
+                <hr>
+                <p class="total"><strong>Total:</strong> {{total}}</p>
+            </div>
+            <button type="button">Pay-{{total}}</button>
+        </div>
+    </div>
+</body>
+</html>
