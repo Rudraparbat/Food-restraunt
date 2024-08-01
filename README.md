@@ -16,7 +16,7 @@ personal restraunt appllication.
        or,
        Go tap the code button there comes a 'download zip file' option then download the zip file.
   # 2. install requirements :
-        pipenv install -r requirements.txt
+        pip install -r requirements.txt
   # 4.Migrate Database :
         python manage.py makemigrations
         python manage.py migrate
