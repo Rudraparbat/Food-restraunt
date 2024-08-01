@@ -13,10 +13,10 @@ personal restraunt appllication.
   # Installation :
   # 1.Clone repo :
        git clone https://github.com/Rudraparbat/Food-restraunt.git
+       or,
+       Go tap the code button there comes a 'download zip file' option then download the zip file.
   # 2. install requirements :
-        pip install pipenv
         pipenv install -r requirements.txt
-        pipenv shell
   # 4.Migrate Database :
         python manage.py makemigrations
         python manage.py migrate
