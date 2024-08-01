@@ -11,3 +11,5 @@ personal restraunt appllication.
   ![paymentpage](https://github.com/user-attachments/assets/eef0656f-01f0-43a7-ab8d-7ef6338a55d2)
 
   #Installation :
+    1. clone repo :
+        
