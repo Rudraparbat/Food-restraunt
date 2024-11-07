@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate , login , logout  
 from django.contrib.auth.decorators import login_required
 import random
+import razorpay
 
 def ind(request) :
     obj = foods.objects.all()
@@ -83,7 +84,13 @@ def pay(request,pk) :
     dc = 50
     pc = 5
     total = a+gs+dc+pc
-    context = {'ab':total,'gs':gs ,'dc':dc,'pc':pc,'a':a ,'p':p}
+    am = total*100
+    client = razorpay.Client(auth=('rzp_test_31Lp1Ol0O2d1Ug' , 'AdqWbdTtjGsaBUGq3HwVkm1a'))
+    payment = client.order.create({'amount':total,'currency':'INR' , 'payment_capture':1})
+    print(payment)
+    pays = Payments(name=ud , amount=total,order_id=payment['id'])
+    pays.save()
+    context = {'ab':total,'gs':gs ,'dc':dc,'pc':pc,'a':a ,'p':p,'am':am}
     return render(request ,'pay.html' , context)
 def offer(request,pk) :
     ud = profile.objects.get(usern=request.user)

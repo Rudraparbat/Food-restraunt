@@ -18,3 +18,7 @@ class contact(models.Model) :
     desc = models.TextField(max_length=255)
     def __str__(self) :
         return str(self.username)
+class Payments(models.Model) :
+    name = models.ForeignKey(profile,on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    order_id = models.CharField(max_length=100)
