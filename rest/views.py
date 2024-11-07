@@ -95,6 +95,5 @@ def offer(request,pk) :
     pc = 5
     total = a-of
     cont = {'a':a ,'gs':gs ,'dc':dc,'pc':pc,'total':total,'p':p , 'of':of}
-
     return render(request ,'offerpage.html' , cont)
 
