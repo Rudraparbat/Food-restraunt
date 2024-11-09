@@ -118,11 +118,12 @@ button:hover {
             <button type="button" id="rzp-button1">Pay- {{ab}}</button>
         </div>
     </div>
+
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         var options = {
             "key": 'rzp_test_31Lp1Ol0O2d1Ug', // Enter the Key ID generated from the Dashboard
-            "amount": "{{am}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             "currency": "INR",
             "name": "Acme Corp",
             "description": "Test Transaction",

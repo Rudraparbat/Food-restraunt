@@ -86,11 +86,10 @@ def pay(request,pk) :
     total = a+gs+dc+pc
     am = total*100
     client = razorpay.Client(auth=('rzp_test_31Lp1Ol0O2d1Ug' , 'AdqWbdTtjGsaBUGq3HwVkm1a'))
-    payment = client.order.create({'amount':total,'currency':'INR' , 'payment_capture':1})
-    print(payment)
+    payment = client.order.create({'amount':total*100,'currency':'INR' , 'payment_capture':1})
     pays = Payments(name=ud , amount=total,order_id=payment['id'])
     pays.save()
-    context = {'ab':total,'gs':gs ,'dc':dc,'pc':pc,'a':a ,'p':p,'am':am}
+    context = {'ab':total,'gs':gs ,'dc':dc,'pc':pc,'a':a ,'p':p,'payment':payment}
     return render(request ,'pay.html' , context)
 def offer(request,pk) :
     ud = profile.objects.get(usern=request.user)
@@ -101,6 +100,10 @@ def offer(request,pk) :
     dc = 50
     pc = 5
     total = a-of
-    cont = {'a':a ,'gs':gs ,'dc':dc,'pc':pc,'total':total,'p':p , 'of':of}
+    client = razorpay.Client(auth=('rzp_test_31Lp1Ol0O2d1Ug' , 'AdqWbdTtjGsaBUGq3HwVkm1a'))
+    payment = client.order.create({'amount':total*100,'currency':'INR' , 'payment_capture':1})
+    pays = Payments(name=ud , amount=total,order_id=payment['id'])
+    pays.save()
+    cont = {'a':a ,'gs':gs ,'dc':dc,'pc':pc,'total':total,'p':p , 'of':of , 'payment':payment}
     return render(request ,'offerpage.html' , cont)
 
