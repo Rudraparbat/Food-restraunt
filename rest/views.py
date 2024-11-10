@@ -51,7 +51,6 @@ def loginic(request) :
         else :
             return HttpResponse("your inputed data is wrong pls enter it correctly...")
     return render(request , 'logini.html')
-
 def getout(request) :
     logout(request)
     return redirect('main')
@@ -62,7 +61,6 @@ def cart(request ,pk) :
     li = 0
     for i in p :
         li += int(i.price)  
-
     if request.method == 'POST' :
         product = foods.objects.get(id=pk)
         ud.item.add(product)
