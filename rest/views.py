@@ -104,4 +104,12 @@ def offer(request,pk) :
     pays.save()
     cont = {'a':a ,'gs':gs ,'dc':dc,'pc':pc,'total':total,'p':p , 'of':of , 'payment':payment}
     return render(request ,'offerpage.html' , cont)
+@login_required(login_url='lo')
+def your_cart(request) :
+    users = profile.objects.get(usern=request.user)
+    context = users.item.all()
+    price = 0
+    for i in context :
+        price += int(i.price)
 
+    return render(request,'your_cart.html' , {'context':context , 'price':price})

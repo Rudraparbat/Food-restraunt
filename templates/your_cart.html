@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .cart-container {
+        width: 80%;
+        max-width: 600px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .cart-title {
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-right: 20px;
+    }
+    
+    .cart-item-details {
+        flex-grow: 1;
+    }
+    
+    .cart-item-title {
+        font-size: 1.2em;
+        color: #333;
+        margin: 0;
+    }
+    
+    .cart-item-price,
+    .cart-item-quantity,
+    .cart-item-total-price {
+        font-size: 1em;
+        color: #666;
+        margin: 5px 0 0;
+    }
+    
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.5em;
+        margin: 20px 0;
+        color: #333;
+    }
+    
+    .cart-total-price {
+        font-weight: bold;
+    }
+    
+    .discount-button {
+        width: 100%;
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+    }
+    
+    .discount-button:hover {
+        background-color: #c0392b;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .discount-section {
+        margin: 20px 0;
+        padding: 10px;
+        background-color: #e74c3c;
+        color: #fff;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .discount-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .discount-details p {
+        font-size: 1.2em;
+        margin: 5px 0;
+    }
+    
+    .original-total,
+    .discount-amount,
+    .final-total {
+        font-weight: bold;
+    }
+    
+    .checkout-button {
+        width: 100%;
+        
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .ncheckout-button {
+        width: 100%;
+        background-color: #020202;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .checkout-button:hover {
+        background-color: #2980b9;
+    }
+    input[type="submit"]{
+        background-color: #000000;
+        border: none;
+        color: white; 
+        padding: 15px 32px; 
+        text-align: center; 
+        text-decoration: none; 
+        display: inline-block;
+        font-size: 16px; 
+        margin: 4px 2px; 
+        cursor: pointer; 
+        border-radius: 12px; 
+        transition: background-color 0.3s;   
+    }
+    
+    input[type="submit"]:hover {
+    background-color: #45a049;
+   
+}
+    
+    
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h1 class="cart-title">Shopping Cart</h1>
+        {% for i in context %}
+        <div class="cart-item">
+            <div class="cart-item-details">
+                <h2 class="cart-item-title">{{i.name}}</h2>
+                <p class="cart-item-price">Desc: {{i.desc}}</p>
+                <p class="cart-item-total-price">Total price: {{i.price}}</p>
+                <form method='POST' action ="{% url 're' i.id %}">
+                    {% csrf_token %}
+                    <input type="submit" value="remove">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="cart-total">
+            <span>Total Bill:</span>
+            <span class="cart-total-price">{{price}}</span>
+        </div>
+        {% if price > 199 %}
+        <button id="discount-button" class="discount-button"><a href="{% url 'off' price %}">your Applicable for 60% Discount upto 120</a></button>
+        {% endif %}
+        {% if price != 0 %}
+        <button  class="checkout-button"><a href="{% url 'pay' price %}">procced</a></button>
+        <button  class="ncheckout-button"><a href="/">add another thing</a></button>
+        {% else %}
+        <button class="checkout-button"><a href="/">your cart is empty add something</a></button>
+        {% endif %}
+    </div>
+
+</body>
+</html>

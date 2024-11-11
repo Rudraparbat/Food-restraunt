@@ -11,5 +11,6 @@ urlpatterns = [
     path('rem/<str:pk>/' ,views.remo, name='re' ),
     path('payment/<str:pk>/' ,views.pay, name='pay' ),
     path('off/<str:pk>/' ,views.offer, name='off' ),
+    path('your_cart' ,views.your_cart, name='your_c' ),
 
 ]
